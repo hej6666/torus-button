@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        #outer{
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            
+            left: 50%;
+            margin-left: -150px;
+            top: 40%;
+        }
+        #outer>div{
+            position: absolute;
+            height: 0px;
+            width: 0px;
+            border: 150px solid rgba(255, 255, 255, 0);
+            border-radius: 50%;
+            float: left;
+            
+            display: none;
+        }
+        #outer #l{
+            border-left: 150px solid #faa;
+            
+        }
+        #outer #l div{
+            position: absolute;
+            left: -130px;
+            top: -0.5em;
+        }
+        #outer #r{
+            border-right: 150px solid lightyellow;
+        }
+        #outer #r div{
+            position: absolute;
+            left: 100px;
+            top: -0.5em;
+            overflow: visible;
+            white-space: nowrap;
+        }
+        #outer #u{
+            border-top: 150px solid lightgreen;
+        }
+        #outer #u div{
+            position: absolute;
+            top: -120px;
+            left: -40px;
+            white-space: nowrap;
+            
+        }
+        #outer #d{
+            border-bottom: 150px solid lightblue;
+            
+        }
+        #outer #d div{
+            position: absolute;
+            top: 100px;
+            white-space: nowrap;
+            left: -40px;
+        }
+        #outer button{
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 50%;
+            margin-left: -75px;
+            top: 50%;
+            margin-top: -75px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 1);
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="l"><div>正常班</div></div>
+        <div id="r"><div>休息</div></div>
+        <div id="u"><div>节假日上班</div></div>
+        <div id="d"><div>休息日上班</div></div>
+        <button id="btn" onmousedown='aclick(event)'  onmouseout="aout(event)">签到</button>
+    </div>
+    <script>
+        var DX,DY,NX,NY;
+        function aclick(e){
+            var btn = document.getElementById('btn');
+            var div = document.getElementById('l');
+            div.style.display='block';
+            div = document.getElementById('r');
+            div.style.display='block';
+            div = document.getElementById('u');
+            div.style.display='block';
+            div = document.getElementById('d');
+            div.style.display='block';
+            
+            DX = e.clientX;
+            DY = e.clientY;
+            
+        }
+        function aout(e){
+            var btn = document.getElementById('btn');
+            var div = document.getElementById('l');
+            div.style.display='none';
+            div = document.getElementById('r');
+            div.style.display='none';
+            div = document.getElementById('u');
+            div.style.display='none';
+            div = document.getElementById('d');
+            div.style.display='none';
+            
+            NX = e.clientX;
+            NY = e.clientY;
+            if(DX || DY){
+                var countX = DX - NX;
+                var countY = DY - NY;
+                if(Math.abs(countX) > Math.abs(countY)){
+                    if(DX > NX){
+                        console.log('左边左边');
+                    }
+                    else{
+                        console.log('右边右边');
+                    }
+                }
+                else{
+                    if(DY > NY){
+                        console.log('上面上面');
+                    }
+                    else{
+                        console.log('下面下面');
+                    }
+                }
+            }
+            DX = DY = null;
+        }
+    </script>
+</body>
+</html>
